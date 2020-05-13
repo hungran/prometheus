@@ -15,6 +15,7 @@ services:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
+      - '--storage.tsdb.retention.time=120d'     
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
@@ -93,6 +94,7 @@ services:
     ports:
       - 3000:3000
     volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini      
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     env_file:
